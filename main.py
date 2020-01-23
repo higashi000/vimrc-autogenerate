@@ -8,9 +8,10 @@ CORS(app)
 @app.route("/generate", methods = ['POST'])
 def generate_vimrc():
     json = request.get_json()
-    DATA = json['data']
+    INDENT = json['indent']
+    COLOR = json['colorscheme']
     vimrc = {\
-            "data": DATA\
+            "body": str(INDENT) + " " + COLOR
             }
 
     return jsonify(vimrc)
