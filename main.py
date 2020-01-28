@@ -10,10 +10,11 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-vimrcs = []
+vimrcs = {}
 
 @app.route("/generate", methods = ['POST'])
 def get_generate_req():
+    global vimrcs
     json = request.get_json()
     UUID = json['uuid']
     INDENT = json['indent']
@@ -34,7 +35,13 @@ def get_generate_req():
                 "body": generater.generater(INDENT, COLOR, None)
                 }
 
-    vimrcs.append({UUID: vimrc})
+    vimrcs.setdefault(UUID, vimrc)
+
+    return jsonify(vimrc)
+
+@app.route("/result/<vimrc_id>", methods = ['GET'])
+def send_vimrc(vimrc_id):
+    vimrc = vimrcs[vimrc_id]
 
     return jsonify(vimrc)
 
