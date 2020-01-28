@@ -46,4 +46,4 @@ def send_vimrc(vimrc_id):
     return jsonify(vimrc)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug = False, host = '0.0.0.0')
