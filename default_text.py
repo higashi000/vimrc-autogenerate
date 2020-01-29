@@ -25,7 +25,7 @@ Plug 'vim/killersheep'\n\
 call plug#end()\n\
 \n\
 syntax enable\n\
-colorscheme iceberg\n\
+colorscheme {}\n\
 set background=dark\n\
 \n\
 set hlsearch\n\

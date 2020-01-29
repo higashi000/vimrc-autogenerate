@@ -41,6 +41,7 @@ def get_generate_req():
 
 @app.route("/result/<vimrc_id>", methods = ['GET'])
 def send_vimrc(vimrc_id):
+    global vimrcs
     vimrc = vimrcs[vimrc_id]
 
     return jsonify(vimrc)
