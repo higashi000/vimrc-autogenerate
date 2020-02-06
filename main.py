@@ -36,8 +36,34 @@ def get_generate_req():
                 }
 
     vimrcs.setdefault(UUID, vimrc)
+    f = open('vimrc', 'a')
+    f.write(vimrc["name"])
+    f.write("\n")
+    f.write(vimrc["uuid"])
+    f.write("\n")
+    f.write(vimrc["body"])
+    f.write("\n")
+    f.write("\n")
+    f.close()
 
     return jsonify(vimrc)
+
+@app.route("/list", methods = ['GET'])
+def vimrc_list():
+    vimrc_data = []
+    print(vimrcs)
+    for i in vimrcs:
+        data = {"uuid": i, "name": vimrcs[i]["name"]}
+        print(data)
+        vimrc_data.append(data)
+
+    data_list = {"inform": vimrc_data}
+
+    print()
+    print(data_list)
+    print()
+
+    return jsonify(data_list)
 
 @app.route("/result/<vimrc_id>", methods = ['GET'])
 def send_vimrc(vimrc_id):
